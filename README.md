@@ -7,6 +7,10 @@ Your image should be in you folder and,
 You should only change that variable (in test.py file):<br>
 <img width="306" alt="Screen Shot 2023-08-20 at 22 56 52" src="https://github.com/aliemre2023/literallyme-determinant/assets/93014021/5b205f9a-5013-4dc3-a5d8-533df9a1b193">
 
+<br>
+Make sure you have 'haarcascade_frontalface_default.xml' in your computer, otherwise program can't run:<br>
+https://github.com/kipr/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml
+
 <br><br>
 <b>--------------------------------------------------------------------------------------------------</b>
 <br><br>
