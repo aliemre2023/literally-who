@@ -46,10 +46,31 @@ def create_train():
 
             # Detect faces in the image and extract regions of interest (ROIs)
             faces_rect = haar_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=4)
-            for (x, y, w, h) in faces_rect:
-                faces_roi = gray[y:y+h, x:x+w]
-                features.append(faces_roi)
-                labels.append(label)
+
+            # Selecting the biggest face
+            # (assuming that will be the inividual)
+            if(len(faces_rect)  != 0):
+                biggest_rect = -1
+                xB = 0
+                yB = 0
+                wB = 0
+                hB = 0
+                for(x, y, w, h) in faces_rect:
+                    new_rect = abs(w)
+                    if(biggest_rect < new_rect):
+                        biggest_rect = new_rect
+                        xB = x
+                        yB = y
+                        wB = w
+                        hB = h
+
+                # Indexes of biggest face
+                faces_rect = [[xB, yB, wB, hB]]
+
+                for (x, y, w, h) in faces_rect:
+                    faces_roi = gray[y:y+h, x:x+w]
+                    features.append(faces_roi)
+                    labels.append(label)
 
 # Call the function to create and train the face recognizer
 create_train()
