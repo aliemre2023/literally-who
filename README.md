@@ -21,8 +21,10 @@ Sample Output 1:<br>
 <img width="682" alt="Screen Shot 2023-08-20 at 23 02 35" src="https://github.com/aliemre2023/literallyme-determinant/assets/93014021/bb7e9f33-9eda-43b7-9083-c4f340d210a6">
 <br><br>
 Sample Output 2:<br>
-<img width="300" alt="Screen Shot 2023-08-20 at 23 02 35" src="https://github.com/aliemre2023/literallyme-determinant/assets/93014021/ae42dfda-9a73-490f-a831-641aeed7d32e"><br>
-<img width="733" alt="Screen Shot 2023-08-20 at 23 05 00" src="https://github.com/aliemre2023/literallyme-determinant/assets/93014021/f831c3ba-ed46-49f5-b949-2da94fee1773">
+![output_20230904_020811](https://github.com/aliemre2023/literallyme-determinant/assets/93014021/e6427499-a906-480c-83ce-07a8a547264f)<br>
+<img width="565" alt="Screen Shot 2023-09-04 at 02 08 35" src="https://github.com/aliemre2023/literallyme-determinant/assets/93014021/a1598640-c8d2-49b6-b37f-72d4b4e754b2">
+
+
 
 <br><br>
 <b>--------------------------------------------------------------------------------------------------</b>
