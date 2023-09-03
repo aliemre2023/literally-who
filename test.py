@@ -2,7 +2,7 @@ import cv2 as cv
 import datetime
 
 #### Load the Image ####
-image_name = "me.jpg"
+image_name = "your_name.jpg"
 ########################
 
 
@@ -41,6 +41,27 @@ gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 # Detect faces using the Haar cascade
 faces_rect = haar_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=4)
 
+
+# Selecting the biggest face
+# (assuming that will be you)
+biggest_rect = -1
+xB = 0
+yB = 0
+wB = 0
+hB = 0
+for(x, y, w, h) in faces_rect:
+    new_rect = abs(w)
+    if(biggest_rect < new_rect):
+        biggest_rect = new_rect
+        xB = x
+        yB = y
+        wB = w
+        hB = h
+
+# Indexes of biggest face
+faces_rect = [[xB, yB, wB, hB]]
+
+# Drawing rectangle and adding text on image
 for (x, y, w, h) in faces_rect:
     # Extract the region of interest (ROI) for face recognition
     faces_roi = gray[y:y+h, x:x+w]
