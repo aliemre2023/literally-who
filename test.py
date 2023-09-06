@@ -95,7 +95,7 @@ text_size_2 = cv.getTextSize(text_2, cv.FONT_HERSHEY_SIMPLEX, font_scale, thickn
 text_label = QLabel(window)
 text_label.setGeometry(60, desired_height + 100, text_size_2[0], 30)
 
-# Function to show arranged data
+# Function to show arranged datas
 def show_data():
     print("Button clicked")
     # Show image
