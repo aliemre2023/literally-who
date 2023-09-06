@@ -1,10 +1,14 @@
 import cv2 as cv
 import datetime
+import sys
+
+from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton
+from PySide6.QtGui import QPixmap
+
 
 #### Load the Image ####
-image_name = "your_name.jpg"
+image_name = "me.jpg"
 ########################
-
 
 img = cv.imread(f"you/{image_name}")
 
@@ -41,26 +45,6 @@ gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 # Detect faces using the Haar cascade
 faces_rect = haar_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=4)
 
-
-# Selecting the biggest face
-# (assuming that will be you)
-biggest_rect = -1
-xB = 0
-yB = 0
-wB = 0
-hB = 0
-for(x, y, w, h) in faces_rect:
-    new_rect = abs(w)
-    if(biggest_rect < new_rect):
-        biggest_rect = new_rect
-        xB = x
-        yB = y
-        wB = w
-        hB = h
-
-# Indexes of biggest face
-faces_rect = [[xB, yB, wB, hB]]
-
 # Drawing rectangle and adding text on image
 for (x, y, w, h) in faces_rect:
     # Extract the region of interest (ROI) for face recognition
@@ -83,14 +67,50 @@ for (x, y, w, h) in faces_rect:
     # Draw a rectangle around the detected face
     cv.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), thickness=2)
 
-# Display the image with detected faces
-cv.imshow("Detected Faces", img)
-
 # Save the output image to a 'saved' folder with a timestamp
 current_time = datetime.datetime.now()
 timestamp = current_time.strftime("%Y%m%d_%H%M%S")
 output_path = f"saved/output_{timestamp}.jpg"
 cv.imwrite(output_path, img)
 
-# Wait for a key press and then close the window
-cv.waitKey(0)
+# The Application
+app = QApplication(sys.argv)
+window = QMainWindow()
+window.setGeometry(100, 100, 400, 600)
+
+# Arrange image for App
+desired_width = 300
+ratio = height / width
+desired_height = int(desired_width * ratio)
+new_size = (desired_width, desired_height)
+resized_image = cv.resize(img, new_size)
+temp_output_path = "saved/resized_image.jpg"
+cv.imwrite(temp_output_path, resized_image)
+
+# Arrangements for displayed datas
+img_label = QLabel(window)
+img_label.setGeometry(50, 100, desired_width, desired_height)
+text_2 = f"{people[label]}, loss:{int(confidence)}"
+text_size_2 = cv.getTextSize(text_2, cv.FONT_HERSHEY_SIMPLEX, font_scale, thickness)[0]
+text_label = QLabel(window)
+text_label.setGeometry(60, desired_height + 100, text_size_2[0], 30)
+
+# Function to show arranged datas
+def show_data():
+    print("Button clicked")
+    # Show image
+    pixmap = QPixmap(temp_output_path)  
+    img_label.setPixmap(pixmap)
+    # Show text
+    text_label.setText(text_2)
+    
+# Button for visualize the image
+button = QPushButton("Run", window)
+button.setGeometry(150, 35, 100, 30)
+button.clicked.connect(show_data)
+
+# Show all app
+window.show()
+
+# Closed the app
+sys.exit(app.exec())
