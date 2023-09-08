@@ -2,13 +2,16 @@ import cv2 as cv
 import datetime
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QFileDialog
-from PySide6.QtGui import QPixmap
+from PySide6.QtGui import QPixmap, QIcon
 
 # THE APPLICATION
 app = QApplication(sys.argv)
 window = QMainWindow()
 window.setGeometry(100, 100, 400, 600)
 window.setWindowTitle("Literallyme Determinant")
+app.setWindowIcon(QIcon("images/icon.ico"))
+window.setMinimumSize(400, 600)
+window.setMaximumSize(400, 600)
 
 # Button for file selectation
 button_opn = QPushButton("Select a File", window)
