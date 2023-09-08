@@ -22,5 +22,4 @@ Sample Output 1:<br>
 <b>--------------------------------------------------------------------------------------------------</b>
 <br><br>
 
-OpenCV and PySide6 librarys were used for this basic code.<br>
-It has no benefit for humanity.
+OpenCV and PySide6 librarys were used for this basic code.
