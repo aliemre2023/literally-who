@@ -4,6 +4,7 @@ import time
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QFileDialog
 from PySide6.QtGui import QPixmap, QIcon, QPalette, QColor
+import pygame
 
 # THE APPLICATION
 app = QApplication(sys.argv)
@@ -70,6 +71,7 @@ text_label = QLabel(window)
 text_label.setGeometry(-30, 550, 460, 30)
 text_label.setPalette(palette1)
 
+human = None
 def show_data():
     if selected_file is None:
         return
@@ -135,6 +137,8 @@ def show_data():
         # Perform face recognition to determine the person and confidence level
         label, confidence = face_recognizer.predict(faces_roi)
         print(f"Predicted Label: {people[label]} with Confidence: {confidence}")
+        global human
+        human = people[label]
 
         # Define font properties for displaying text
         text_1 = str(people[label])
@@ -173,11 +177,31 @@ def show_data():
     text_2 = f"{people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]}"
     text_label.setText(text_2)
 
+pygame.init()    
+def play_sound():
+    global human
+    # Audio playing
+    if(human == "Burhan Altintop"):
+        pygame.mixer.music.load("audios/burhan-altintop.mp3")
+        pygame.mixer.music.play()
+    elif(human == "Patrick Bateman"):
+        pygame.mixer.music.load("audios/patrick-bateman.mp3")
+        pygame.mixer.music.play()
+    elif(human == "The Driver (Drive)"):
+        pygame.mixer.music.load("audios/the-driver-drive.mp3")
+        pygame.mixer.music.play()
+    elif(human == "Recep Ivedik"):
+        pygame.mixer.music.load("audios/recep-ivedik.mp3")
+        pygame.mixer.music.play()
+    else:
+        print("Music not added yet.")
+
 # Button for visualize the image
 button_run = QPushButton("Run", window)
 button_run.setGeometry(150, 50, 100, 30)
 button_run.setStyleSheet("background-color: green;")
 button_run.clicked.connect(show_data)
+button_run.clicked.connect(play_sound)
 
 # Show all app
 window.show()
