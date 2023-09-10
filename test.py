@@ -1,25 +1,41 @@
 import cv2 as cv
 import datetime
+import time
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QFileDialog
-from PySide6.QtGui import QPixmap, QIcon
+from PySide6.QtGui import QPixmap, QIcon, QPalette, QColor
 
 # THE APPLICATION
 app = QApplication(sys.argv)
 window = QMainWindow()
 window.setGeometry(100, 100, 400, 600)
-window.setWindowTitle("Literallyme Determinant")
+window.setWindowTitle("Literally Who")
 app.setWindowIcon(QIcon("images/icon.ico"))
 window.setMinimumSize(400, 600)
 window.setMaximumSize(400, 600)
 
-# Button for file selectation
+# Set background image
+background_image = QPixmap("images/dolphin.png")
+background_label = QLabel(window)
+background_label.setPixmap(background_image)
+background_label.setGeometry(0, 0, 400, 600)
+
+# Create a QPalette and set the text color (foreground color)
+palette1 = QPalette()
+text_color = QColor(255, 33, 255)  
+palette1.setColor(QPalette.WindowText, text_color)
+palette2 = QPalette()
+text_color = QColor(00, 255, 255)  
+palette2.setColor(QPalette.WindowText, text_color)
+
+# Button for file selctation
 button_opn = QPushButton("Select a File", window)
 button_opn.setGeometry(150, 15, 100, 30)
-
+button_opn.setStyleSheet("background-color: pink;")
 # Label to show file name
 path_label = QLabel(window)
-path_label.setGeometry(140, 60, 300, 30)
+path_label.setGeometry(60, 90, 280, 30)
+path_label.setPalette(palette2)
 
 selected_file = None
 def open_file_dialog():
@@ -39,17 +55,20 @@ def open_file_dialog():
             # Label to show image path
             ways = selected_file.split("/")
             outp = ways[-1]
-            
-            path_label.setText(outp)
+            text_size = cv.getTextSize(str(outp), cv.FONT_HERSHEY_SIMPLEX, fontScale=2.0, thickness=2)[0]
+            #path_label.setGeometry(200 - text_size[0]/2, 90, 100, 30)
+            #time.sleep(1)
+            path_label.setText("Selected Image: " + outp)
             path_label.show()
 
 button_opn.clicked.connect(open_file_dialog)
 
 # Create labels for displaying data
 img_label = QLabel(window)
-img_label.setGeometry(50, 100, 300, 400)
+img_label.setGeometry(50, 120, 300, 400)
 text_label = QLabel(window)
-text_label.setGeometry(60, 520, 300, 30)
+text_label.setGeometry(-30, 550, 460, 30)
+text_label.setPalette(palette1)
 
 def show_data():
     if selected_file is None:
@@ -150,12 +169,14 @@ def show_data():
     pixmap = QPixmap(temp_output_path)
     img_label.setPixmap(pixmap)
     # Show text on app
-    text_2 = f"{people[label]}, loss:{int(confidence)}"
+    text_label.setStyleSheet("border: 2px solid #ff33ff")
+    text_2 = f"{people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]}"
     text_label.setText(text_2)
 
 # Button for visualize the image
 button_run = QPushButton("Run", window)
-button_run.setGeometry(150, 35, 100, 30)
+button_run.setGeometry(150, 50, 100, 30)
+button_run.setStyleSheet("background-color: green;")
 button_run.clicked.connect(show_data)
 
 # Show all app
