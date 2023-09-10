@@ -16,7 +16,8 @@ Sample GUI Output:<br>
 <img width="402" alt="Screen Shot 2023-09-11 at 00 24 22" src="https://github.com/aliemre2023/literally-who/assets/93014021/2d88f952-74f0-4412-8448-52afd38a64bb">
 <br>
 Sample Console Output:<br>
-<img width="400" alt="Screen Shot 2023-09-11 at 00 24 57" src="https://github.com/aliemre2023/literally-who/assets/93014021/0148de5d-0851-4675-bb2c-343273f87e7a">
+
+<img width="400" alt="Screen Shot 2023-09-11 at 01 48 39" src="https://github.com/aliemre2023/literally-who/assets/93014021/c8d39d01-b331-4095-80ae-0fced79f7df9">
 
 
 
@@ -25,4 +26,4 @@ Sample Console Output:<br>
 <b>--------------------------------------------------------------------------------------------------</b>
 <br><br>
 
-OpenCV and PySide6 libraries were used for this basic code.
+OpenCV, PySide6 and PyGame libraries were used for this basic code.
