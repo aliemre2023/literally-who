@@ -12,8 +12,11 @@ https://github.com/kipr/opencv/blob/master/data/haarcascades/haarcascade_frontal
 
 
 
-Sample Output 1:<br>
-<img width="400" alt="Screen Shot 2023-09-07 at 17 59 06" src="https://github.com/aliemre2023/literallyme-determinant/assets/93014021/41926366-d7f9-42aa-bee2-40ae4b08f591">
+Sample GUI Output:<br>
+<img width="402" alt="Screen Shot 2023-09-11 at 00 24 22" src="https://github.com/aliemre2023/literally-who/assets/93014021/2d88f952-74f0-4412-8448-52afd38a64bb">
+<br>
+Sample Console Output:<br>
+<img width="400" alt="Screen Shot 2023-09-11 at 00 24 57" src="https://github.com/aliemre2023/literally-who/assets/93014021/0148de5d-0851-4675-bb2c-343273f87e7a">
 
 
 
@@ -22,4 +25,4 @@ Sample Output 1:<br>
 <b>--------------------------------------------------------------------------------------------------</b>
 <br><br>
 
-OpenCV and PySide6 librarys were used for this basic code.
+OpenCV and PySide6 libraries were used for this basic code.
