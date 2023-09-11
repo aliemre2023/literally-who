@@ -202,6 +202,8 @@ def play_sound():
         pygame.mixer.music.load("audios/saul-goodman.mp3")
     elif(human == "Obama"):
         pygame.mixer.music.load("audios/obama.mp3")
+    elif(human == "Travis Bickle (Taxi Driver)"):
+        pygame.mixer.music.load("audios/travis-bickle-taxi-driver.mp3")
     else:
         print("Music not founded.")
     pygame.mixer.music.play()
