@@ -3,7 +3,7 @@ import cv2 as cv
 import numpy as np
 
 # List of recognized individuals
-people = ["The Driver (Drive)", 
+people = ["Ryan Gosling", 
           "Patrick Bateman", 
           "Burhan Altintop", 
           "Recep Ivedik", 
@@ -14,7 +14,6 @@ people = ["The Driver (Drive)",
           "Joker (Joaquin Phoenix)",
           "Joker (Heath Ledger)",
           "Saul Goodman",
-          "Joe (Blade Runner 2049)",
           "Travis Bickle (Taxi Driver)",
           "Obama",
           "Jesse Pinkman"]

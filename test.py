@@ -1,6 +1,5 @@
 import cv2 as cv
 import datetime
-import time
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QFileDialog
 from PySide6.QtGui import QPixmap, QIcon, QPalette, QColor
@@ -56,9 +55,6 @@ def open_file_dialog():
             # Label to show image path
             ways = selected_file.split("/")
             outp = ways[-1]
-            text_size = cv.getTextSize(str(outp), cv.FONT_HERSHEY_SIMPLEX, fontScale=2.0, thickness=2)[0]
-            #path_label.setGeometry(200 - text_size[0]/2, 90, 100, 30)
-            #time.sleep(1)
             path_label.setText("Selected Image: " + outp)
             path_label.show()
 
@@ -82,7 +78,7 @@ def show_data():
     haar_cascade = cv.CascadeClassifier(cv.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
     # List of recognized individuals
-    people = ["The Driver (Drive)", 
+    people = ["Ryan Gosling", 
             "Patrick Bateman", 
             "Burhan Altintop", 
             "Recep Ivedik", 
@@ -93,7 +89,6 @@ def show_data():
             "Joker (Joaquin Phoenix)",
             "Joker (Heath Ledger)",
             "Saul Goodman",
-            "Joe (Blade Runner 2049)",
             "Travis Bickle (Taxi Driver)",
             "Obama",
             "Jesse Pinkman"]
@@ -143,7 +138,7 @@ def show_data():
         # Define font properties for displaying text
         text_1 = str(people[label])
         font_scale = height / 800.0
-        thickness = max(1, int(height / 300))
+        thickness = max(2, int(height / 300))
         text_size = cv.getTextSize(text_1, cv.FONT_HERSHEY_SIMPLEX, font_scale, thickness)[0]   
         start_x = int((x + (w/2)) - text_size[0] / 2)
         
@@ -183,18 +178,33 @@ def play_sound():
     # Audio playing
     if(human == "Burhan Altintop"):
         pygame.mixer.music.load("audios/burhan-altintop.mp3")
-        pygame.mixer.music.play()
     elif(human == "Patrick Bateman"):
         pygame.mixer.music.load("audios/patrick-bateman.mp3")
-        pygame.mixer.music.play()
-    elif(human == "The Driver (Drive)"):
-        pygame.mixer.music.load("audios/the-driver-drive.mp3")
-        pygame.mixer.music.play()
+    elif(human == "Ryan Gosling"):
+        pygame.mixer.music.load("audios/ryan-gosling.mp3")
     elif(human == "Recep Ivedik"):
         pygame.mixer.music.load("audios/recep-ivedik.mp3")
-        pygame.mixer.music.play()
+    elif(human == "Tyler Durden"):
+        pygame.mixer.music.load("audios/tyler-durden.mp3")       
+    elif(human == "The Narrator"):
+        pygame.mixer.music.load("audios/tyler-durden.mp3")   
+    elif(human == "Joker (Joaquin Phoenix)"):
+        pygame.mixer.music.load("audios/joker-joaquin-phoenix.mp3")   
+    elif(human == "Joker (Heath Ledger)"):
+        pygame.mixer.music.load("audios/joker-heath-ledger.mp3")
+    elif(human == "Batman (The Batman)"):
+        pygame.mixer.music.load("audios/batman-the-batman.mp3")
+    elif(human == "Jesse Pinkman"):
+        pygame.mixer.music.load("audios/jesse-pinkman.mp3")
+    elif(human == "Walter White"):
+        pygame.mixer.music.load("audios/walter-white.mp3")
+    elif(human == "Saul Goodman"):
+        pygame.mixer.music.load("audios/saul-goodman.mp3")
+    elif(human == "Obama"):
+        pygame.mixer.music.load("audios/obama.mp3")
     else:
-        print("Music not added yet.")
+        print("Music not founded.")
+    pygame.mixer.music.play()
 
 # Button for visualize the image
 button_run = QPushButton("Run", window)
