@@ -19,7 +19,6 @@ class LiterallyWho(QMainWindow):
     def initUI(self):
         self.setGeometry(100, 100, 400, 600)
         self.setWindowTitle("Literally Who")
-        self.setWindowIcon(QIcon("images/icon.ico"))
         self.setMinimumSize(400, 600)
         self.setMaximumSize(400, 600)
 
@@ -41,14 +40,12 @@ class LiterallyWho(QMainWindow):
         button_opn = QPushButton("Select a File", self)
         button_opn.setGeometry(150, 15, 100, 30)
         button_opn.setStyleSheet("background-color: pink;")
+        button_opn.clicked.connect(self.open_file_dialog)
 
         # Label to show file name
         self.path_label = QLabel(self)
         self.path_label.setGeometry(60, 90, 280, 30)
         self.path_label.setPalette(palette2)
-
-        self.selected_file = None
-        button_opn.clicked.connect(self.open_file_dialog)
 
         # Create labels for displaying data
         self.img_label = QLabel(self)
@@ -56,8 +53,6 @@ class LiterallyWho(QMainWindow):
         self.text_label = QLabel(self)
         self.text_label.setGeometry(-30, 550, 460, 30)
         self.text_label.setPalette(palette1)
-
-        self.human = None
 
         # Button for visualize the image
         button_run = QPushButton("Run", self)
@@ -141,56 +136,61 @@ class LiterallyWho(QMainWindow):
         # Indexes of biggest face
         faces_rect = [[xB, yB, wB, hB]]
 
-        # Drawing rectangle and adding text on image
-        for (x, y, w, h) in faces_rect:
-            # Extract the region of interest (ROI) for face recognition
-            faces_roi = gray[y:y+h, x:x+w]
+        if(hB == 0):
+            print("No face detected !")
+        else:
+            # Drawing rectangle and adding text on image
+            for (x, y, w, h) in faces_rect:
+                # Extract the region of interest (ROI) for face recognition
+                faces_roi = gray[y:y+h, x:x+w]
 
-            # Perform face recognition to determine the person and confidence level
-            label, confidence = face_recognizer.predict(faces_roi)
-            print(f"Predicted Label: {people[label]} with Confidence: {confidence}")
-            
-            self.human = people[label]
+                # Perform face recognition to determine the person and confidence level
+                label, confidence = face_recognizer.predict(faces_roi)
+                print(f"Predicted Label: {people[label]} with Confidence: {confidence}")
+                
+                self.human = people[label]
 
-            # Define font properties for displaying text
-            text_1 = str(people[label])
-            font_scale = height / 800.0
-            thickness = max(2, int(height / 300))
-            text_size = cv.getTextSize(text_1, cv.FONT_HERSHEY_SIMPLEX, font_scale, thickness)[0]   
-            start_x = int((x + (w/2)) - text_size[0] / 2)
-            
-            # Display the name above and below the detected face
-            cv.putText(img, text_1, (start_x, y - int(height/50)), cv.FONT_HERSHEY_SIMPLEX, font_scale, (0, 255, 0), thickness)
-            
-            # Draw a rectangle around the detected face
-            cv.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), thickness=2)
+                # Define font properties for displaying text
+                text_1 = str(people[label])
+                font_scale = height / 800.0
+                thickness = max(2, int(height / 300))
+                text_size = cv.getTextSize(text_1, cv.FONT_HERSHEY_SIMPLEX, font_scale, thickness)[0]   
+                start_x = int((x + (w/2)) - text_size[0] / 2)
+                
+                # Display the name above and below the detected face
+                cv.putText(img, text_1, (start_x, y - int(height/50)), cv.FONT_HERSHEY_SIMPLEX, font_scale, (0, 255, 0), thickness)
+                
+                # Draw a rectangle around the detected face
+                cv.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), thickness=2)
 
-        # Save the output image to a 'saved' folder with a timestamp
-        current_time = datetime.datetime.now()
-        timestamp = current_time.strftime("%Y%m%d_%H%M%S")
-        output_path = f"saved/output_{timestamp}.jpg"
-        cv.imwrite(output_path, img)
+            # Save the output image to a 'saved' folder with a timestamp
+            current_time = datetime.datetime.now()
+            timestamp = current_time.strftime("%Y%m%d_%H%M%S")
+            output_path = f"saved/output_{timestamp}.jpg"
+            cv.imwrite(output_path, img)
 
-        # Arrange image for App
-        desired_width = 300
-        ratio = height / width
-        desired_height = int(desired_width * ratio)
-        new_size = (desired_width, desired_height)
-        resized_image = cv.resize(img, new_size)
-        temp_output_path = "saved/temp_image.jpg"
-        cv.imwrite(temp_output_path, resized_image)
+            # Arrange image for App
+            desired_width = 300
+            ratio = height / width
+            desired_height = int(desired_width * ratio)
+            new_size = (desired_width, desired_height)
+            resized_image = cv.resize(img, new_size)
+            temp_output_path = "saved/temp_image.jpg"
+            cv.imwrite(temp_output_path, resized_image)
 
-        # Show image on app
-        temp_output_path = "saved/temp_image.jpg"
-        pixmap = QPixmap(temp_output_path)
-        self.img_label.setPixmap(pixmap)
-        # Show text on app
-        self.text_label.setStyleSheet("border: 2px solid #ff33ff")
-        text_2 = f"{people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]}"
-        self.text_label.setText(text_2)
-    
+            # Show image on app
+            temp_output_path = "saved/temp_image.jpg"
+            pixmap = QPixmap(temp_output_path)
+            self.img_label.setPixmap(pixmap)
+            # Show text on app
+            self.text_label.setStyleSheet("border: 2px solid #ff33ff")
+            text_2 = f"{people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]}"
+            self.text_label.setText(text_2)
+        
     def play_sound(self):
-        pygame.init() 
+        pygame.init()
+        # base music
+        pygame.mixer.music.load("audios/The-Cruel-Angel's-Thesis.mp3") 
         if self.human == "Burhan Altintop":
             pygame.mixer.music.load("audios/burhan-altintop.mp3")
         elif(self.human == "Patrick Bateman"):
@@ -225,6 +225,7 @@ class LiterallyWho(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon("images/icon.ico"))
     mainWindow = LiterallyWho()
     mainWindow.show()
     sys.exit(app.exec())
