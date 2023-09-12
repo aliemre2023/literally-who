@@ -16,7 +16,10 @@ people = ["Ryan Gosling",
           "Saul Goodman",
           "Travis Bickle (Taxi Driver)",
           "Obama",
-          "Jesse Pinkman"]
+          "Jesse Pinkman",
+          "Nejat Isler",
+          "Issiz Adam Alper",
+          "Cayci Huseyin"]
 
 # Path of the directory containing the datasets
 DIR = r'dataset'
