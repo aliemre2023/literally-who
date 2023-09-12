@@ -103,7 +103,10 @@ class LiterallyWho(QMainWindow):
                 "Saul Goodman",
                 "Travis Bickle (Taxi Driver)",
                 "Obama",
-                "Jesse Pinkman"]
+                "Jesse Pinkman",
+                "Nejat Isler",
+                "Issiz Adam Alper",
+                "Cayci Huseyin"]
 
         # Load a trained face recognizer model
         face_recognizer = cv.face.LBPHFaceRecognizer_create()
@@ -184,7 +187,7 @@ class LiterallyWho(QMainWindow):
             self.img_label.setPixmap(pixmap)
             # Show text on app
             self.text_label.setStyleSheet("border: 2px solid #ff33ff")
-            text_2 = f"{people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]}"
+            text_2 = f"{people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]}"
             self.text_label.setText(text_2)
         
     def play_sound(self):
@@ -219,6 +222,13 @@ class LiterallyWho(QMainWindow):
             pygame.mixer.music.load("audios/obama.mp3")
         elif(self.human == "Travis Bickle (Taxi Driver)"):
             pygame.mixer.music.load("audios/travis-bickle-taxi-driver.mp3")
+        elif(self.human == "Issiz Adam Alper"):
+            pygame.mixer.music.load("audios/issiz-adam-alper.mp3")
+        elif(self.human == "Nejat Isler"):
+            pygame.mixer.music.load("audios/nejat-isler.mp3")
+        elif(self.human == "Cayci Huseyin"):
+            pygame.mixer.music.load("audios/cayci-huseyin.mp3")
+        
         else:
             print("Music not founded.")
         pygame.mixer.music.play()
