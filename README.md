@@ -13,7 +13,7 @@ https://github.com/kipr/opencv/blob/master/data/haarcascades/haarcascade_frontal
 
 
 Sample GUI Output:<br>
-<img width="402" alt="Screen Shot 2023-09-11 at 00 24 22" src="https://github.com/aliemre2023/literally-who/assets/93014021/2d88f952-74f0-4412-8448-52afd38a64bb">
+<img width="401" alt="Screen Shot 2024-03-09 at 02 43 34" src="https://github.com/aliemre2023/literally-who/assets/93014021/6d17b29f-4a2b-4dd8-a2b5-f91f4a5ba53f">
 <br>
 Sample Console Output:<br>
 
