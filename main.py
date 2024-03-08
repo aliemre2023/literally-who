@@ -1,9 +1,12 @@
+import os
 import sys
 import cv2 as cv
 import datetime
 from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QFileDialog
 from PySide6.QtGui import QIcon, QPixmap, QPalette, QColor
 import pygame
+import time
+
 
 class LiterallyWho(QMainWindow):
     def __init__(self):
@@ -13,6 +16,7 @@ class LiterallyWho(QMainWindow):
         self.human = None
         self.img_label = QLabel(self)
         self.text_label = QLabel(self)
+        self.frame_exist = False
 
         self.initUI()
 
@@ -36,11 +40,17 @@ class LiterallyWho(QMainWindow):
         text_color = QColor(0, 255, 255)
         palette2.setColor(QPalette.WindowText, text_color)
 
+        # Button for photo shoot
+        button_photo = QPushButton("Take a Photo", self)
+        button_photo.setGeometry(95, 15, 100, 30)
+        button_photo.setStyleSheet("background-color: pink;")
+        button_photo.clicked.connect(self.open_photo_dialog)
+
         # Button for file selection
-        button_opn = QPushButton("Select a File", self)
-        button_opn.setGeometry(150, 15, 100, 30)
-        button_opn.setStyleSheet("background-color: pink;")
-        button_opn.clicked.connect(self.open_file_dialog)
+        button_file = QPushButton("Select a File", self)
+        button_file.setGeometry(205, 15, 100, 30)
+        button_file.setStyleSheet("background-color: pink;")
+        button_file.clicked.connect(self.open_file_dialog)
 
         # Label to show file name
         self.path_label = QLabel(self)
@@ -79,6 +89,17 @@ class LiterallyWho(QMainWindow):
                 outp = ways[-1]
                 self.path_label.setText("Selected Image: " + outp)
                 self.path_label.show()
+    
+    def open_photo_dialog(self):
+        self.frame_exist = True
+        cap = cv.VideoCapture(0)
+        time.sleep(1)
+        ret, frame = cap.read()
+
+        cv.imwrite("frame.jpg", frame)
+        self.selected_file = "frame.jpg"
+        self.path_label.setText("Selected Image: frame.jpg")
+        self.path_label.show()
 
     def show_data(self):
         if self.selected_file is None:
@@ -190,10 +211,14 @@ class LiterallyWho(QMainWindow):
             text_2 = f"{people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]} - {people[label]}"
             self.text_label.setText(text_2)
         
+        if(self.frame_exist):
+            os.remove("frame.jpg")
+            self.frame_exist = False
+        
     def play_sound(self):
         pygame.init()
         # base music
-        pygame.mixer.music.load("audios/The-Cruel-Angel's-Thesis.mp3") 
+        pygame.mixer.music.load("audios/womp-womp.mp3") 
         if self.human == "Burhan Altintop":
             pygame.mixer.music.load("audios/burhan-altintop.mp3")
         elif(self.human == "Patrick Bateman"):
